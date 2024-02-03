@@ -6,14 +6,14 @@ class UserModel {
     _args: any,
     context: Context
   ) {
-    const { prisma } = context;
+    
 
     
   }
 
   getAllUsers = async (_parent: any, _args: any, context: Context) => {
-    const { prisma } = context;
-    return await prisma.user.findMany();
+    
+    
   };
 }
 
