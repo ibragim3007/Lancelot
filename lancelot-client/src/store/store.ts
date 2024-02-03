@@ -1,3 +1,4 @@
+import { chatReducer } from './reducers/chatReducer/chatSlice';
 import { snackReducer } from './reducers/snackbar/snackbarSlice';
 import { userReducer } from './reducers/userInfo/userSlice';
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -6,6 +7,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 const rootReducer = combineReducers({
   userReducer,
   snackReducer,
+  chatReducer,
 });
 
 export const setupStore = () => {

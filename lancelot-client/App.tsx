@@ -10,13 +10,6 @@ import { setupStore } from "./src/store/store";
 const store = setupStore();
 
 export default function App() {
-  const socketRef = useRef<Socket | null>(null);
-
-  useEffect(() => {
-    const socket = (socketRef.current = io(process.env.API || ""));
-    socket.emit("message", JSON.stringify(new Date()));
-  }, []);
-
   return (
     <Provider store={store}>
       <PaperProvider theme={darkTheme}>

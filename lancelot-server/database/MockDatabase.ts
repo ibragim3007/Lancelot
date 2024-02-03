@@ -1,6 +1,8 @@
+import { IUserInfo } from "../src/interface/interfaces";
+
 interface IDefaultDatabaseObject {
   id: string;
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 
@@ -21,6 +23,7 @@ class MockDatabase<T extends IDefaultDatabaseObject> {
   }
 
   create(object: T) {
+    console.log(object);
     this.data.push(object);
   }
 
@@ -38,7 +41,7 @@ class MockDatabase<T extends IDefaultDatabaseObject> {
 
 class DataBase {
   messages = new MockDatabase();
-  users = new MockDatabase();
+  users = new MockDatabase<IUserInfo>();
 }
 
 const db = new DataBase();
