@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { useAppDispatch } from "../../../hooks/storeHooks";
 import { connectUser } from "../../../store/reducers/userInfo/actions/connectUser";
@@ -26,10 +26,10 @@ const StartModule = () => {
   return (
     <View
       style={{
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         gap: 20,
+        height: "60%",
       }}
     >
       <View style={{ gap: 50 }}>
@@ -42,21 +42,25 @@ const StartModule = () => {
             Здесь полная анонимность ваши сообщения нигде не будут сохраняться
           </Text>
         </View>
-        <View style={{ gap: 20 }}>
-          <TextInput
-            onChangeText={(newValue) => onChangeInput(newValue)}
-            value={name}
-            style={{ width: "100%", textAlign: "center" }}
-            placeholder="Придумайте ник"
-          />
-          <Button
-            onPress={onPressButton}
-            disabled={!isAvailableToEnter}
-            mode="contained"
-          >
-            Начать
-          </Button>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "position" : "height"}
+        >
+          <View style={{ gap: 20 }}>
+            <TextInput
+              onChangeText={(newValue) => onChangeInput(newValue)}
+              value={name}
+              style={{ width: "100%", textAlign: "center" }}
+              placeholder="Придумайте ник"
+            />
+            <Button
+              onPress={onPressButton}
+              disabled={!isAvailableToEnter}
+              mode="contained"
+            >
+              Начать
+            </Button>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     </View>
   );

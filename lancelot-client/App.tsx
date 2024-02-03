@@ -1,11 +1,10 @@
-import { useEffect, useRef } from "react";
 import { PaperProvider } from "react-native-paper";
-import { Socket, io } from "socket.io-client";
+import { Provider } from "react-redux";
 import NavigatorMenu from "./src/navigation/Navigator";
 import SafeProvider from "./src/shared/layout/SafeProvider";
 import { darkTheme } from "./src/shared/theme/darkTheme";
-import { Provider } from "react-redux";
 import { setupStore } from "./src/store/store";
+import { StatusBar } from "react-native";
 
 const store = setupStore();
 
@@ -13,6 +12,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PaperProvider theme={darkTheme}>
+        <StatusBar />
         <SafeProvider>
           <NavigatorMenu />
         </SafeProvider>

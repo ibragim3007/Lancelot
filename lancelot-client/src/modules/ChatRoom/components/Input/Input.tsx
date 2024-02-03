@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import { IMessage } from "../../../../interface/interfaces";
@@ -18,6 +18,7 @@ const Input: React.FC<InputProps> = ({ sendMessage }) => {
     sendMessage({
       text: textInput,
       createAt: new Date(),
+      id: "",
     });
     setTextInput("");
     setShowButton(false);
@@ -33,24 +34,30 @@ const Input: React.FC<InputProps> = ({ sendMessage }) => {
   };
 
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <TextInput
-        style={{ flex: 1, marginHorizontal: 20 }}
-        mode="outlined"
-        value={textInput}
-        placeholder="Ваше сообщение"
-        onChangeText={changeInput}
-      />
-      {showButton && (
-        <Button
-          onPress={pressButton}
-          icon={({ size, color }) => (
-            <Icon name="send" color={color} size={size + 10} />
-          )}
-          children={undefined}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "position" : "height"}
+    >
+      <View
+        style={{ flexDirection: "row", alignItems: "center", marginBottom: 80 }}
+      >
+        <TextInput
+          style={{ flex: 1, marginHorizontal: 20 }}
+          mode="outlined"
+          value={textInput}
+          placeholder="Ваше сообщение"
+          onChangeText={changeInput}
         />
-      )}
-    </View>
+        {showButton && (
+          <Button
+            onPress={pressButton}
+            icon={({ size, color }) => (
+              <Icon name="send" color={color} size={size + 10} />
+            )}
+            children={undefined}
+          />
+        )}
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 

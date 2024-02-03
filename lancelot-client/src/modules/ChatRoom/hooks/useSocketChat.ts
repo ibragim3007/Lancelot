@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/storeHooks";
 import { chatAction } from "../../../store/reducers/chatReducer/chatSlice";
 import { IMessage, IUserInfo } from "../../../interface/interfaces";
 import { snackAction } from "../../../store/reducers/snackbar/snackbarSlice";
+import { API_URL } from "../../../config";
 
 export const useSocketChat = () => {
   const socketRef = useRef<Socket | null>(null);
@@ -12,7 +13,7 @@ export const useSocketChat = () => {
   const dispath = useAppDispatch();
 
   useEffect(() => {
-    const socket = (socketRef.current = io(process.env.API || ""));
+    const socket = (socketRef.current = io(API_URL || ""));
     socket.emit("connection", userInfo);
 
     socket.on("connection", (user: IUserInfo, message: IMessage) => {
@@ -26,7 +27,6 @@ export const useSocketChat = () => {
     });
 
     socket.on("message", (msg) => {
-      console.log(msg);
       dispath(chatAction.addMessage(msg));
     });
 

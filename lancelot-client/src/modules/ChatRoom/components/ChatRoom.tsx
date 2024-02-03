@@ -8,6 +8,7 @@ import Input from "./Input/Input";
 import { useSocketChat } from "../hooks/useSocketChat";
 import axios from "axios";
 import { chatAction } from "../../../store/reducers/chatReducer/chatSlice";
+import { API_URL } from "../../../config";
 
 const ChatRoom = () => {
   const { users } = useAppSelector((state) => state.chatReducer);
@@ -16,16 +17,12 @@ const ChatRoom = () => {
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    console.log("ENTER");
     setLoading(true);
 
     (async () => {
       try {
-        console.log(process.env.API);
-        const resultMessages = await axios.get(
-          `${process.env.API}/get-all-messages`
-        );
-        const resultUsers = await axios.get(`${process.env.API}/get-all-users`);
+        const resultMessages = await axios.get(`${API_URL}/get-all-messages`);
+        const resultUsers = await axios.get(`${API_URL}/get-all-users`);
 
         if (resultMessages.data && resultUsers.data) {
           dispath(chatAction.setMessages(resultMessages.data));

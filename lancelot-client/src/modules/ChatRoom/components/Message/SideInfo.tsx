@@ -21,7 +21,7 @@ const SideInfo: React.FC<SideInfoProps> = ({ message }) => {
     >
       {message.type === "new-user" && (
         <Text variant="bodySmall" style={{ textAlign: "center" }}>
-          Пользователь {message.user.name} присоеденился к чату
+          Пользователь {message.user.name} присоединился к чату
         </Text>
       )}
       {message.type === "exit-user" && (

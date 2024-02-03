@@ -1,14 +1,11 @@
 import React from "react";
+import { LayoutAnimation, View } from "react-native";
 import { Card, Text, useTheme } from "react-native-paper";
-import { IMessage } from "../../../../interface/interfaces";
 import { useAppSelector } from "../../../../hooks/storeHooks";
-import {
-  getFullTime,
-  getTime,
-  getTimeHourse,
-} from "../../../../shared/helpers/getTime";
-import { View } from "react-native";
+import { IMessage } from "../../../../interface/interfaces";
+import { getTimeHourse } from "../../../../shared/helpers/getTime";
 import SideInfo from "./SideInfo";
+import Animated, { Layout, SlideInDown } from "react-native-reanimated";
 
 interface MessageProps {
   message: IMessage;
@@ -23,37 +20,39 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     return <SideInfo message={message} />;
 
   return (
-    <Card
-      style={{
-        backgroundColor: isMe
-          ? colors.inverseOnSurface
-          : colors.tertiaryContainer,
-        padding: 10,
-        marginTop: 10,
+    <Animated.View entering={SlideInDown}>
+      <Card
+        style={{
+          backgroundColor: isMe
+            ? colors.inverseOnSurface
+            : colors.tertiaryContainer,
+          padding: 10,
+          marginTop: 10,
 
-        width: "auto",
-        flex: 0,
-        alignSelf: isMe ? "flex-end" : "flex-start",
-        flexDirection: "row",
-        maxWidth: "80%",
-      }}
-    >
-      <View style={{ flexDirection: "row", gap: 15 }}>
-        <Text
-          variant="bodySmall"
-          style={{ marginBottom: 5, color: colors.primary }}
-        >
-          {message.user.name || "no_user_name"}
-        </Text>
-        <Text
-          variant="bodySmall"
-          style={{ fontSize: 10, color: colors.primary, fontStyle: "italic" }}
-        >
-          {getTimeHourse(message.createAt) || ""}
-        </Text>
-      </View>
-      <Text>{message.text}</Text>
-    </Card>
+          width: "auto",
+          flex: 0,
+          alignSelf: isMe ? "flex-end" : "flex-start",
+          flexDirection: "row",
+          maxWidth: "80%",
+        }}
+      >
+        <View style={{ flexDirection: "row", gap: 15 }}>
+          <Text
+            variant="bodySmall"
+            style={{ marginBottom: 5, color: colors.primary }}
+          >
+            {message.user.name || "no_user_name"}
+          </Text>
+          <Text
+            variant="bodySmall"
+            style={{ fontSize: 10, color: colors.primary, fontStyle: "italic" }}
+          >
+            {getTimeHourse(message.createAt) || ""}
+          </Text>
+        </View>
+        <Text>{message.text}</Text>
+      </Card>
+    </Animated.View>
   );
 };
 
