@@ -11,16 +11,24 @@ const SideInfo: React.FC<SideInfoProps> = ({ message }) => {
   return (
     <Card
       style={{
-        padding: 6,
+        padding: 6.25,
         marginTop: 20,
         paddingHorizontal: 30,
         alignSelf: "center",
         borderRadius: 100,
+        backgroundColor: colors.background,
       }}
     >
-      <Text variant="bodySmall" style={{ textAlign: "center" }}>
-        Пользователь {message.user.name} присоеденился к чату
-      </Text>
+      {message.type === "new-user" && (
+        <Text variant="bodySmall" style={{ textAlign: "center" }}>
+          Пользователь {message.user.name} присоеденился к чату
+        </Text>
+      )}
+      {message.type === "exit-user" && (
+        <Text variant="bodySmall" style={{ textAlign: "center" }}>
+          Пользователь {message.user.name} покинул чат
+        </Text>
+      )}
     </Card>
   );
 };

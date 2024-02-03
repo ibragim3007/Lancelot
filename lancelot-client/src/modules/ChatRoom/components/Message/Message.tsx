@@ -19,7 +19,8 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   const userID = useAppSelector((state) => state.userReducer.userInfo?.id);
   const isMe = message.user.id === userID;
 
-  if (message.type === "new-user") return <SideInfo message={message} />;
+  if (message.type === "new-user" || message.type === "exit-user")
+    return <SideInfo message={message} />;
 
   return (
     <Card

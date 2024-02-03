@@ -3,7 +3,7 @@ export interface IMessage {
   text: string;
   createAt: Date;
   user: IUserInfo;
-  type?: 'default' | 'new-user';
+  type?: 'default' | 'new-user' | 'exit-user';
 }
 
 export interface IUserInfo {

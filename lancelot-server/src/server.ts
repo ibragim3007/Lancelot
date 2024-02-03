@@ -59,7 +59,7 @@ const onConnection = (socket: Socket<DefaultEventsMap, DefaultEventsMap, Default
       id: String(new Date().getMilliseconds),
       createAt: new Date(),
       text: `Пользователь ${msg.name} покинул чат`,
-      type: 'new-user',
+      type: 'exit-user',
       user: msg,
     });
 
