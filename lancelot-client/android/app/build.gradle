@@ -83,7 +83,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.lancelotclient"
+    namespace 'com.ibragimlol.lancelotclient'
     defaultConfig {
         applicationId 'com.ibragimlol.lancelotclient'
         minSdkVersion rootProject.ext.minSdkVersion

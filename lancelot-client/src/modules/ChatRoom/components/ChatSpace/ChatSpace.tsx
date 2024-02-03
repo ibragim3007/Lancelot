@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from "react";
-import { FlatList, ScrollView } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
 import { Card, useTheme } from "react-native-paper";
 // import messages from "../../../../mock/messages.json";
-import Message from "../Message/Message";
-import { IMessage } from "../../../../interface/interfaces";
+import Animated, { Layout } from "react-native-reanimated";
 import { useAppSelector } from "../../../../hooks/storeHooks";
+import { IMessage } from "../../../../interface/interfaces";
+import Message from "../Message/Message";
 
 const renderItem = ({ item }: { item: IMessage }) => {
   return <Message message={item} />;

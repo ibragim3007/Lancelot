@@ -1,11 +1,11 @@
 import React from "react";
-import { LayoutAnimation, View } from "react-native";
+import { View } from "react-native";
 import { Card, Text, useTheme } from "react-native-paper";
+import Animated, { FadeInDown, Layout } from "react-native-reanimated";
 import { useAppSelector } from "../../../../hooks/storeHooks";
 import { IMessage } from "../../../../interface/interfaces";
 import { getTimeHourse } from "../../../../shared/helpers/getTime";
 import SideInfo from "./SideInfo";
-import Animated, { Layout, SlideInDown } from "react-native-reanimated";
 
 interface MessageProps {
   message: IMessage;
@@ -20,7 +20,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     return <SideInfo message={message} />;
 
   return (
-    <Animated.View entering={SlideInDown}>
+    <Animated.View entering={FadeInDown} layout={Layout.duration(150)}>
       <Card
         style={{
           backgroundColor: isMe
