@@ -12,18 +12,24 @@ import { chatAction } from "../../../store/reducers/chatReducer/chatSlice";
 const ChatRoom = () => {
   const { users } = useAppSelector((state) => state.chatReducer);
   const dispath = useAppDispatch();
-  const { sendMessage } = useSocketChat();
+  const { sendMessage, leaveFromChat } = useSocketChat();
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    console.log("ENTER");
     setLoading(true);
 
     (async () => {
       try {
-        const result = await axios.get(`${process.env.API}/get-all-messages`);
+        console.log(process.env.API);
+        const resultMessages = await axios.get(
+          `${process.env.API}/get-all-messages`
+        );
+        const resultUsers = await axios.get(`${process.env.API}/get-all-users`);
 
-        if (result.data) {
-          dispath(chatAction.setMessages(result.data));
+        if (resultMessages.data && resultUsers.data) {
+          dispath(chatAction.setMessages(resultMessages.data));
+          dispath(chatAction.setUsers(resultUsers.data));
         }
       } catch (e) {
         console.log(e);
@@ -34,7 +40,7 @@ const ChatRoom = () => {
   }, []);
   return (
     <View style={{ gap: 20 }}>
-      <BackButton />
+      <BackButton leaveFromChat={leaveFromChat} />
       {/* <Text>Доброе пожаловать {userInfo?.name}!</Text> */}
       <Text>Пользователей онлайн: {users.length}</Text>
       {loading ? <ActivityIndicator /> : <ChatSpace />}

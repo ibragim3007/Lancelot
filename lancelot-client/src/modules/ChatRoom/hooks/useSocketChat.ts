@@ -15,13 +15,14 @@ export const useSocketChat = () => {
     const socket = (socketRef.current = io(process.env.API || ""));
     socket.emit("connection", userInfo);
 
-    socket.on("connection", (users: IUserInfo[]) => {
-      dispath(chatAction.setUser(users));
+    socket.on("connection", (user: IUserInfo, message: IMessage) => {
+      dispath(chatAction.addUser(user));
+      dispath(chatAction.addMessage(message));
     });
 
-    socket.on("user-leave", (msg) => {
-      console.log(msg);
-      dispath(chatAction.removeUser(msg));
+    socket.on("user-leave", (user, message: IMessage) => {
+      dispath(chatAction.removeUser(user));
+      dispath(chatAction.addMessage(message));
     });
 
     socket.on("message", (msg) => {
@@ -30,7 +31,6 @@ export const useSocketChat = () => {
     });
 
     return () => {
-      socket.emit("user-leave", userInfo);
       socket.disconnect();
     };
   }, []);
@@ -48,7 +48,13 @@ export const useSocketChat = () => {
     socketRef.current.emit("message", msg);
   };
 
+
+  const leaveFromChat = () => {
+    socketRef.current?.emit('user-leave', userInfo);
+  };
+
   return {
     sendMessage,
+    leaveFromChat
   };
 };

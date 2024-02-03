@@ -5,10 +5,15 @@ import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useNavigate } from "../../../../hooks/useNavigate";
 
-const BackButton = () => {
+interface BackButtonProps {
+  leaveFromChat: () => void;
+}
+
+const BackButton: React.FC<BackButtonProps> = ({ leaveFromChat }) => {
   const { navigateToStartPage } = useNavigate();
 
   const onPressButton = () => {
+    leaveFromChat();
     navigateToStartPage();
   };
 

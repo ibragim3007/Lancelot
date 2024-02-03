@@ -27,11 +27,11 @@ export const chatSlice = createSlice({
     addUser(state, action: PayloadAction<IUserInfo>) {
       state.users.push(action.payload);
     },
-    setUser(state, action: PayloadAction<IUserInfo[]>) {
+    setUsers(state, action: PayloadAction<IUserInfo[]>) {
       state.users = action.payload;
     },
     removeUser(state, action: PayloadAction<IUserInfo>) {
-      state.users.filter((u) => u.id !== action.payload.id);
+      state.users = state.users.filter((u) => u.id !== action.payload.id);
     },
   },
 });

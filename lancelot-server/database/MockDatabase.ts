@@ -1,4 +1,4 @@
-import { IUserInfo } from "../src/interface/interfaces";
+import { IMessage, IUserInfo } from "../src/interface/interfaces";
 
 interface IDefaultDatabaseObject {
   id: string;
@@ -25,10 +25,13 @@ class MockDatabase<T extends IDefaultDatabaseObject> {
   create(object: T) {
     console.log(object);
     this.data.push(object);
+    return object;
   }
 
   remove(id: string) {
-    this.data = this.data.filter((item) => item.id !== id);
+    if (this.data && this.data.length !== 0) {
+      this.data = this.data.filter((item) => item.id !== id);
+    }
   }
 
   update(id: string, data: T) {
@@ -40,7 +43,7 @@ class MockDatabase<T extends IDefaultDatabaseObject> {
 }
 
 class DataBase {
-  messages = new MockDatabase();
+  messages = new MockDatabase<IMessage>();
   users = new MockDatabase<IUserInfo>();
 }
 

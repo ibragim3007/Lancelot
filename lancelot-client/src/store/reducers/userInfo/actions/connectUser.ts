@@ -12,7 +12,7 @@ export const connectUser = (name: string) => (dispath: AppDispatch, getState: ()
       
       dispath(userAction.setUserInfo({
         name,
-        id: String(new Date()),
+        id: String(new Date().getMilliseconds()),
       }));
 
 

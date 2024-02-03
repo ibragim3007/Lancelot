@@ -8,6 +8,7 @@ import {
   getTimeHourse,
 } from "../../../../shared/helpers/getTime";
 import { View } from "react-native";
+import SideInfo from "./SideInfo";
 
 interface MessageProps {
   message: IMessage;
@@ -17,6 +18,9 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   const { colors } = useTheme();
   const userID = useAppSelector((state) => state.userReducer.userInfo?.id);
   const isMe = message.user.id === userID;
+
+  if (message.type === "new-user") return <SideInfo message={message} />;
+
   return (
     <Card
       style={{
