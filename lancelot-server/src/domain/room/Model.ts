@@ -10,7 +10,7 @@ class RoomModel {
     _args: any,
     context: Context
   ) {
-    const { prisma, db } = context;
+    const { db } = context;
     
     return db.messages.findAll();
   }
