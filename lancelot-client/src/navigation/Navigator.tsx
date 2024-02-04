@@ -15,6 +15,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const NavigatorMenu: React.FC = () => {
   return (
     <NavigationContainer
+      independent
       theme={{
         dark: true,
         colors: {
