@@ -4,3 +4,4 @@ lancelot-client/.env
 
 # Local Netlify folder
 .netlify
+.expo
