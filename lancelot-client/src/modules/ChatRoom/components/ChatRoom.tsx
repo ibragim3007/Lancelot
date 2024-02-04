@@ -13,7 +13,7 @@ import { API_URL } from "../../../config";
 const ChatRoom = () => {
   const { users } = useAppSelector((state) => state.chatReducer);
   const dispath = useAppDispatch();
-  const { sendMessage, leaveFromChat } = useSocketChat();
+  const { sendMessage, leaveFromChat, loadSocketChat } = useSocketChat();
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -36,11 +36,13 @@ const ChatRoom = () => {
     setLoading(false);
   }, []);
   return (
-    <View style={{ gap: 20 }}>
+    <View style={{ gap: 20, height: "100%", maxHeight: 860 }}>
       <BackButton leaveFromChat={leaveFromChat} />
       {/* <Text>Доброе пожаловать {userInfo?.name}!</Text> */}
       <Text>Пользователей онлайн: {users.length}</Text>
-      {loading ? <ActivityIndicator /> : <ChatSpace />}
+
+      {loading || loadSocketChat ? <ActivityIndicator /> : <ChatSpace />}
+
       <Input sendMessage={sendMessage} />
     </View>
   );

@@ -4,7 +4,7 @@ import NavigatorMenu from "./src/navigation/Navigator";
 import SafeProvider from "./src/shared/layout/SafeProvider";
 import { darkTheme } from "./src/shared/theme/darkTheme";
 import { setupStore } from "./src/store/store";
-import { StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 
 const store = setupStore();
 

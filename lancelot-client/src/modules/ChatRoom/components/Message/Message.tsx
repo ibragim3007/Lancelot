@@ -20,39 +20,44 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     return <SideInfo message={message} />;
 
   return (
-    <Animated.View entering={FadeInDown} layout={Layout.duration(150)}>
-      <Card
-        style={{
-          backgroundColor: isMe
-            ? colors.inverseOnSurface
-            : colors.tertiaryContainer,
-          padding: 10,
-          marginTop: 10,
+    <Card
+      style={{
+        backgroundColor: isMe ? colors.backdrop : colors.secondaryContainer,
+        padding: 10,
+        marginTop: 10,
+        paddingBottom: 15,
+        paddingRight: 30,
+        width: "auto",
+        // flex: 0,
+        alignSelf: isMe ? "flex-end" : "flex-start",
+        flexDirection: "row",
+        maxWidth: "80%",
+        borderRadius: 15,
+      }}
+    >
+      <Text
+        variant="bodyMedium"
+        style={{ marginBottom: 0, color: colors.primary }}
+      >
+        {message.user.name || "no_user_name"}
+      </Text>
 
-          width: "auto",
-          flex: 0,
-          alignSelf: isMe ? "flex-end" : "flex-start",
-          flexDirection: "row",
-          maxWidth: "80%",
+      <Text variant="bodyMedium">{message.text}</Text>
+      <Text
+        variant="bodySmall"
+        style={{
+          fontSize: 9,
+          color: colors.primary,
+          fontStyle: "italic",
+          textAlign: "right",
+          position: "absolute",
+          right: -23,
+          bottom: -13,
         }}
       >
-        <View style={{ flexDirection: "row", gap: 15 }}>
-          <Text
-            variant="bodySmall"
-            style={{ marginBottom: 5, color: colors.primary }}
-          >
-            {message.user.name || "no_user_name"}
-          </Text>
-          <Text
-            variant="bodySmall"
-            style={{ fontSize: 10, color: colors.primary, fontStyle: "italic" }}
-          >
-            {getTimeHourse(message.createAt) || ""}
-          </Text>
-        </View>
-        <Text>{message.text}</Text>
-      </Card>
-    </Animated.View>
+        {getTimeHourse(message.createAt) || ""}
+      </Text>
+    </Card>
   );
 };
 

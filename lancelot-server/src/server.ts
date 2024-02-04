@@ -3,11 +3,17 @@ import { createServer } from 'node:http';
 import { Server, Socket } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import db from '../database/MockDatabase';
+import cors from 'cors';
 import { Context, context } from './context/context';
 import { IUserInfo } from './interface/interfaces';
 
 const PORT = 3000;
 const app = express();
+
+app.use(cors({
+  origin: '*'
+}));
+
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
