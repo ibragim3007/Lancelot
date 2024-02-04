@@ -10,9 +10,7 @@ import { IUserInfo } from './interface/interfaces';
 const PORT = 3000;
 const app = express();
 
-app.use(cors({
-  origin: '*'
-}));
+app.use(cors());
 
 const server = createServer(app);
 const io = new Server(server, {
